@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import useQuiosco from "../hooks/useQuiosco";
-import { formatearDinero } from "../helpers";
+import useQuiosco from "@/hooks/useQuiosco";
+import { formatearDinero } from "@/helpers";
 
 const ModalProducto = () => {
   const { producto, handleChangeModal, handleAgregarPedido, pedido } =
@@ -9,6 +9,7 @@ const ModalProducto = () => {
   const [cantidad, setCantidad] = useState(1);
   const [edicion, setEdicion] = useState(false);
 
+  // Comprobar si el modal acutual esta en el pedido
   useEffect(() => {
     if (pedido.some((pedidoState) => pedidoState.id === producto.id)) {
       const productoEdicion = pedido.find(
@@ -25,21 +26,20 @@ const ModalProducto = () => {
         <Image
           width={300}
           height={400}
-          alt={`imagen producto ${producto.nombre}`}
+          alt={`imagen ${producto.nombre}`}
           src={`/assets/img/${producto.imagen}.jpg`}
         />
       </div>
-
       <div className="md:w-2/3">
-        <div className="flex justify-end">
+        <div className="flex justify-end ">
           <button onClick={handleChangeModal}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
               fill="none"
               viewBox="0 0 24 24"
+              strokeWidth={1.5}
               stroke="currentColor"
-              strokeWidth={2}
+              className="w-6 h-6"
             >
               <path
                 strokeLinecap="round"
@@ -53,22 +53,22 @@ const ModalProducto = () => {
         <p className="mt-5 font-black text-5xl text-amber-500">
           {formatearDinero(producto.precio)}
         </p>
-
-        <div className="flex gap-4 mt-5">
+        <div className="flex  gap-4 mt-5">
           <button
             type="button"
             onClick={() => {
               if (cantidad <= 1) return;
+
               setCantidad(cantidad - 1);
             }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-7 w-7"
               fill="none"
               viewBox="0 0 24 24"
+              strokeWidth={1.5}
               stroke="currentColor"
-              strokeWidth={2}
+              className="w-7 h-7"
             >
               <path
                 strokeLinecap="round"
@@ -77,43 +77,40 @@ const ModalProducto = () => {
               />
             </svg>
           </button>
-
           <p className="text-3xl">{cantidad}</p>
-
           <button
             type="button"
             onClick={() => {
               if (cantidad >= 5) return;
+
               setCantidad(cantidad + 1);
             }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-7 w-7"
               fill="none"
               viewBox="0 0 24 24"
+              strokeWidth={1.5}
               stroke="currentColor"
-              strokeWidth={2}
+              className="w-7 h-7"
             >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
           </button>
         </div>
-
         <button
           type="button"
-          className="bg-indigo-600 hover:bg-indigo-800 px-5 py-2 mt-5 text-white font-bold uppercase rounded"
+          className="bg-indigo-600 hover:bg-indigo-800 px-5 py-2 mt-5 text-white uppercase font-bold rounded"
           onClick={() => handleAgregarPedido({ ...producto, cantidad })}
         >
-          {edicion ? "Guardar Cambios" : "Añadir al Pedido"}
+          {edicion ? "Guardar Cambios " : "Agregar al Pedido"}
         </button>
       </div>
     </div>
   );
 };
-
 export default ModalProducto;

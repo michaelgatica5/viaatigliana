@@ -1,9 +1,8 @@
 import Image from "next/image";
-import useQuiosco from "../hooks/useQuiosco";
+import useQuiosco from "@/hooks/useQuiosco";
 
 const Categoria = ({ categoria }) => {
   const { categoriaActual, handleClickCategoria } = useQuiosco();
-
   const { nombre, icono, id } = categoria;
   return (
     <div
@@ -17,10 +16,9 @@ const Categoria = ({ categoria }) => {
         src={`/assets/img/icono_${icono}.svg`}
         alt="Imagen Icono"
       />
-
       <button
         type="button"
-        className="text-2xl font-bold hover:cursor-pointer"
+        className="font-2xl font-bold hover:cursor-pointer"
         onClick={() => handleClickCategoria(id)}
       >
         {nombre}

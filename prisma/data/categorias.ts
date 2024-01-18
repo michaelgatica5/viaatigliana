@@ -1,31 +1,28 @@
-
 const categorias = [
-    {
-        icono: "cafe",
-        nombre: "Café"
-      },
-      {
-        icono: "hamburguesa",
-        nombre: "Hamburguesas"
-      },
-      {
-        icono: "pizza",
-        nombre: "Pizzas"
-      },
-      {
-        icono: "dona",
-        nombre: "Donas"
-      },
-      {
-        icono: "pastel",
-        nombre: "Pasteles"
-      },
-      {
-        icono: "galletas",
-        nombre: "Galletas"
-      }
-]
+  {
+    icono: "cafe",
+    nombre: "Coffee",
+  },
+  {
+    icono: "hamburguesa",
+    nombre: "Burgers",
+  },
+  {
+    icono: "pizza",
+    nombre: "Pizzas",
+  },
+  {
+    icono: "dona",
+    nombre: "Donuts",
+  },
+  {
+    icono: "pastel",
+    nombre: "Cakes",
+  },
+  {
+    icono: "galletas",
+    nombre: "Cookies",
+  },
+];
 
-export {
-    categorias 
-}
+export { categorias };

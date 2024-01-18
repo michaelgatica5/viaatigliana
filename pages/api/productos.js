@@ -7,5 +7,6 @@ export default async function handler(req, res) {
       categoriaId: 1,
     },
   });
+
   res.status(200).json(productos);
 }
