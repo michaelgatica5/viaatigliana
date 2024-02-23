@@ -3,7 +3,8 @@ import useQuiosco from "@/hooks/useQuiosco";
 import Categoria from "./Categoria";
 
 const Sidebar = () => {
-  const { categorias } = useQuiosco();
+  const { categorias2 } = useQuiosco();
+  // console.log("test2",categorias2.data)
   return (
     <>
       <Image
@@ -13,9 +14,15 @@ const Sidebar = () => {
         alt="Imagen Logotipo"
       />
       <nav className="mt-10">
-        {categorias.map((categoria) => (
+        {/* {categorias.map((categoria) => (
           <Categoria key={categoria.id} categoria={categoria} />
-        ))}
+        ))} */}
+        
+        {categorias2.data ?
+          categorias2.data.map((categoria) => (
+            <Categoria key={categoria.id} categoria={categoria} />
+          )) : <></>
+        }
       </nav>
     </>
   );

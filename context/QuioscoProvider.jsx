@@ -6,8 +6,9 @@ import { useRouter } from "next/router";
 const QuioscoContext = createContext();
 
 const QuioscoProvider = ({ children }) => {
-  const [categorias, setCategorias] = useState([]);
+  const [categorias2, setCategorias2] = useState([]);
   const [categoriaActual, setCategoriaActual] = useState({});
+  const [productos, setProductos] = useState({});
   const [producto, setProducto] = useState({});
   const [modal, setModal] = useState(false);
   const [pedido, setPedido] = useState([]);
@@ -16,31 +17,65 @@ const QuioscoProvider = ({ children }) => {
 
   const router = useRouter();
 
-  const obtenerCategorias = async () => {
-    const { data } = await axios("./api/categorias");
-    setCategorias(data);
+  // const obtenerCategorias = async () => {
+  //   const { data } = await axios("./api/categorias");
+  //   setCategorias(data);
+  // };
+
+  const obtenerCategorias2 = async () => {
+    const { data } = await axios("https://via-atigliana.up.railway.app/api/categorias");
+    setCategorias2(data);
+    // console.log("data",data)
+    // setCategoriaActual(data.data[0])
+    // console.log("categoriaActual",categoriaActual)
+    // setCategoriaActual([categoriaActual, data]);
+  };
+
+  const obtenerCatActual = async () => {
+    const { data } = await axios("https://via-atigliana.up.railway.app/api/productos?populate=*")
+    setProductos(data)
+    const productsActuales = data.data.filter((cat) => cat.attributes.categoria.data.id === 1);
+    setCategoriaActual(categorias2?.data?.[0]);
+    setCategoriaActual(prevState => ({
+      ...prevState,
+      productos: productsActuales
+    }));
+    // console.log("CategoriaActual",categoriaActual)
+    // setPedido([...pedido, producto]);
+
   };
 
   useEffect(() => {
-    obtenerCategorias();
+    // obtenerCategorias();
+    obtenerCategorias2()
   }, []);
 
   useEffect(() => {
-    setCategoriaActual(categorias[0]);
-  }, [categorias]);
+    obtenerCatActual()
+  }, [categorias2]);
+
 
   useEffect(() => {
     const nuevoTotal = pedido.reduce(
-      (total, producto) => producto.precio * producto.cantidad + total,
+      (total, producto) => producto.attributes.precio * producto.cantidad + total,
       0
     );
     setTotal(nuevoTotal);
   }, [pedido]);
 
   const handleClickCategoria = (id) => {
-    const categoria = categorias.filter((cat) => cat.id === id);
-    setCategoriaActual(categoria[0]);
-    console.log(categoria[0]);
+    // const categoria = categorias.filter((cat) => cat.id === id);
+    const category = categorias2.data.filter((cat) => cat.id === id);
+
+    // Get productos
+
+    const productsActuales = productos.data.filter((cat) => cat.attributes.categoria.data.id === id);
+    setCategoriaActual(category?.data?.[0]);
+    setCategoriaActual(prevState => ({
+      ...category[0],
+      productos: productsActuales
+    }));
+    
     router.push("/");
   };
 
@@ -93,12 +128,12 @@ const QuioscoProvider = ({ children }) => {
       });
 
       // Resetear la App
-      setCategoriaActual(categorias[0]);
+      console.log("categoriaActual",categoriaActual)
       setPedido([]);
       setNombre("");
       setTotal(0);
       toast.success("Pedido Realizado Correctamente");
-      setTimeout(() => {
+      setTimeout(() => {  
         router.push("/");
       }, 3000);
     } catch (error) {
@@ -112,12 +147,13 @@ const QuioscoProvider = ({ children }) => {
   return (
     <QuioscoContext.Provider
       value={{
-        categorias,
+        categorias2,
         categoriaActual,
         modal,
         producto,
         pedido,
         nombre,
+        productos,
         handleClickCategoria,
         handleSetProducto,
         handleChangeModal,

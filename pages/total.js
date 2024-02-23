@@ -5,6 +5,7 @@ import { formatearDinero } from "@/helpers";
 
 export default function Total() {
   const { pedido, nombre, setNombre, colocarOrden, total } = useQuiosco();
+  console.log("pedido",pedido)
 
   const comprobarPedido = useCallback(() => {
     return pedido.length === 0 || nombre === "" || nombre.length < 3;
@@ -37,7 +38,7 @@ export default function Total() {
         <div className="mt-10">
           <p className="text-2xl">
             Total a pagar {""}{" "}
-            <span className="font-bold">{formatearDinero(total)}</span>
+            <span className="font-bold">${total}</span>
           </p>
         </div>
         <div>

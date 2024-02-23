@@ -4,10 +4,10 @@ import useQuiosco from "@/hooks/useQuiosco";
 import { formatearDinero } from "@/helpers";
 
 const ModalProducto = () => {
-  const { producto, handleChangeModal, handleAgregarPedido, pedido } =
-    useQuiosco();
+  const { producto, handleChangeModal, handleAgregarPedido, pedido } = useQuiosco();
   const [cantidad, setCantidad] = useState(1);
   const [edicion, setEdicion] = useState(false);
+  console.log("producto",producto)
 
   // Comprobar si el modal acutual esta en el pedido
   useEffect(() => {
@@ -22,15 +22,15 @@ const ModalProducto = () => {
 
   return (
     <div className="md:flex gap-10">
-      <div className="md:w-1/3">
+      {/* <div className="md:w-1/3">
         <Image
           width={300}
           height={400}
-          alt={`imagen ${producto.nombre}`}
+          alt={`imagen ${producto.attributes.nombre}`}
           src={`/assets/img/${producto.imagen}.jpg`}
         />
-      </div>
-      <div className="md:w-2/3">
+      </div> */}
+      <div className="md:w-3/3">
         <div className="flex justify-end ">
           <button onClick={handleChangeModal}>
             <svg
@@ -49,9 +49,9 @@ const ModalProducto = () => {
             </svg>
           </button>
         </div>
-        <h1 className="text-3xl font-bold mt-5">{producto.nombre}</h1>
+        <h1 className="text-3xl font-bold mt-5">{producto.attributes.nombre}</h1>
         <p className="mt-5 font-black text-5xl text-amber-500">
-          {formatearDinero(producto.precio)}
+          ${producto.attributes.precio}
         </p>
         <div className="flex  gap-4 mt-5">
           <button
