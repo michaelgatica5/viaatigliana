@@ -46,7 +46,7 @@ const Orden = ({ orden }) => {
       </div>
       <div className="md:flex md:items-center md:justify-between my-10">
         <p className=" mt-5 font-black text-4xl text-amber-500">
-          Total a Pagar: {formatearDinero(total)}
+          Total a Pagar: {total}
         </p>
         <button
           className="bg-indigo-600 hover:bg-indigo-800 text-white md:mt-0 py-3 px-10 uppercase font-bold rounded-lg"

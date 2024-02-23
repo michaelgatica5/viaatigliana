@@ -7,8 +7,8 @@ export default function AdminLayout({ children, pagina }) {
   return (
     <>
       <Head>
-        <title>Café - {pagina}</title>
-        <meta name="description" content="Quosco Cafetería" />
+        <title>Via Atigliana - {pagina}</title>
+        <meta name="description" content="" />
       </Head>
       <div className="md:flex">
         <aside className="md:w-4/12 xl:w-1/4 2xl:w-1/5 py-5">
