@@ -1,46 +1,31 @@
-import { signOut, useSession } from 'next-auth/react';
-import Head from 'next/head';
-import Link from 'next/link';
 import { useEffect } from 'react';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 import styles from '../styles/Home.module.css';
+import Head from 'next/head';
 
 export default function Home() {
   const { data: session } = useSession();
+  const router = useRouter();
 
   useEffect(() => {
-    if (session == null) return;
-    console.log('session.jwt', session.jwt);
-  }, [session]);
+    if (session) {
+      console.log("pasa por aqui");
+      router.replace('/list');
+    }
+  }, [session, router]);
 
   return (
     <div className={styles.container}>
       <Head>
-        <title>Strapi - Next - NextAuth</title>
+        <title>Via Atigliana - Login</title>
       </Head>
-      <h1>{session ? 'Authenticated' : 'Not Authenticated'}</h1>
-      {session && (
-        <div style={{ marginBottom: 10 }}>
-          <h3>Session Data</h3>
-          <div>Email: {session.user.email}</div>
-          <div>JWT from Strapi: Check console</div>
+      {!session && (
+        <div>
+          <h1>Not Authenticated</h1>
+          <button onClick={() => router.push('/auth/sign-in')} className='bg-sky-400 px-3 py-2 rounded mt-2'>Sign In</button>
         </div>
       )}
-      {session ? (
-        <button onClick={signOut}>Sign out</button>
-      ) : (
-        <Link href="/auth/sign-in">
-          <button>Sign In</button>
-        </Link>
-      )}
-      <Link href="/list">
-        <button
-          style={{
-            marginTop: 10,
-          }}
-        >
-          Protected Page
-        </button>
-      </Link>
     </div>
   );
 }
