@@ -20,7 +20,7 @@ function Log() {
   const handleSignOut = async () => {
     await signOut();
     console.log("Signed out");
-    router.push('/');
+    // router.push('/');
   };
 
   return (
