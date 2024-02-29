@@ -1,11 +1,16 @@
 import "@/styles/globals.css";
 import { QuioscoProvider } from "../context/QuioscoProvider";
 import useQuiosco from "@/hooks/useQuiosco";
+import { SessionProvider } from 'next-auth/react';
 
-export default function App({ Component, pageProps }) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   return (
-    <QuioscoProvider>
-      <Component {...pageProps} />
-    </QuioscoProvider>
+    <SessionProvider session={session}>
+      <QuioscoProvider>
+        <Component {...pageProps} />
+      </QuioscoProvider>
+    </SessionProvider>
   );
 }
+
+export default MyApp;
