@@ -22,7 +22,7 @@ const SignIn = () => {
 
   return (
     <div className='flex items-center justify-center h-screen'>
-    <div className={`${styles.container} mx-auto p-4 bg-gray-100 rounded-lg shadow-md font-indiana`}>
+    <div className={`mx-auto p-4 bg-gray-100 rounded-lg shadow-md font-indiana`}>
       <Head>
         <title>Via Atigliana - Login</title>
       </Head>
