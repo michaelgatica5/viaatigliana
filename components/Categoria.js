@@ -7,11 +7,16 @@ const Categoria = ({ categoria}) => {
   const { id } = categoria;
   console.log(categoriaActual)
   console.log("categoria",categoria)
+  function cerrar() {
+    let navbar = document.querySelector(".navbar-toggler");
+    navbar.click();
+  }
   return (
+    
     <div
       className={`${
-        categoriaActual?.id === id ? "bg-amber-400" : ""
-      } flex items-center gap-4 w-full border p-5 hover:bg-amber-400`}
+        categoriaActual?.id === id ? "border-secondary-gold border-4" : ""
+      } flex items-center gap-4 w-full border p-5 hover:`}
     >
       {/* <Image
         width={70}
@@ -19,10 +24,13 @@ const Categoria = ({ categoria}) => {
         // src={`/assets/img/icono_${icono}.svg`}
         alt="Imagen Icono"
       /> */}
+      
       <button
         type="button"
-        className="font-2xl font-bold hover:cursor-pointer"
-        onClick={() => handleClickCategoria(id)}
+        className="font-2xl font-extrabold tracking-wider hover:cursor-pointer"
+        onClick={() => handleClickCategoria(id)
+        
+        }
       >
         {nombre}
       </button>

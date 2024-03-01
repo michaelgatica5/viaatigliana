@@ -22,11 +22,14 @@ const Pasos = () => {
   };
   return (
     <>
+
+    <div className="sticky top-0 bg-white pt-3 pb-0.5">
+
       <div className="flex justify-between mb-5">
         {pasos.map((paso) => (
           <button
             key={paso.paso}
-            className="text-2xl font-bold"
+            className="md:text-2xl font-bold sm:text-xl"
             onClick={() => {
               router.push(paso.url);
             }}
@@ -37,10 +40,13 @@ const Pasos = () => {
       </div>
       <div className="bg-gray-100 mb-10">
         <div
-          className="rounded-full bg-amber-500 text-xs leading-none h-2 text-center text-white"
+          className="rounded-full bg-secondary-gold text-xs leading-none h-2 text-center text-white"
           style={{ width: `${calcularProgreso()}%` }}
         ></div>
       </div>
+
+    </div>     
+
     </>
   );
 };
