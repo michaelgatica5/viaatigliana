@@ -36,7 +36,6 @@ export default function Home() {
     {
       session ?
         <Layout pagina={`Menu ${categoriaActual?.attributes?.nombre}`}>
-          <Log/>
           <h1 className="text-4xl font-black">{categoriaActual?.attributes?.nombre}</h1>
           <p className="text-2xl my-10">
             Elige y personaliza tu pedido a continuación
@@ -49,10 +48,6 @@ export default function Home() {
         </Layout>
         :
         <>
-          {/* <Head>
-            <title>Via Atigliana - Login</title>
-            <meta name="description"/>
-          </Head> */}
           {
             showLoading ?
             <div className='h-screen flex justify-center items-center'>

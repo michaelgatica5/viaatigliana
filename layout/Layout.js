@@ -5,6 +5,7 @@ import useQuiosco from "@/hooks/useQuiosco";
 import Sidebar from "@/components/Sidebar";
 import ModalProducto from "@/components/ModalProducto";
 import Pasos from "@/components/Pasos";
+import Log from "@/components/Log";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -29,6 +30,7 @@ export default function Layout({ children, pagina }) {
         <title>Via Atigliana - {pagina}</title>
         <meta name="description" content="" />
       </Head>
+      <Log/>
       <div className="md:flex">
         <aside className="md:w-4/12 xl:w-1/4 2xl:w-1/5">
           <Sidebar />

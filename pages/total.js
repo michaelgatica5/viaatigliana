@@ -2,10 +2,12 @@ import Layout from "@/layout/Layout";
 import { useEffect, useCallback } from "react";
 import useQuiosco from "@/hooks/useQuiosco";
 import { formatearDinero } from "@/helpers";
+import { useSession } from "next-auth/react";
 
 export default function Total() {
   const { pedido, nombre, setNombre, colocarOrden, total } = useQuiosco();
   console.log("pedido",pedido)
+  const { data: session } = useSession();
 
   const comprobarPedido = useCallback(() => {
     return pedido.length === 0 || nombre === "" || nombre.length < 3;
@@ -21,19 +23,33 @@ export default function Total() {
       <p className="text-2xl my-10">Confirma tu Pedido a continuacion</p>
       <form onSubmit={colocarOrden}>
         <div>
-          <label
-            htmlFor="nombre"
-            className="block text-slate-800 uppercase font-bold  text-3xl"
-          >
-            Nombre
-          </label>
-          <input
-            id="nombre"
-            type="text"
-            className="bg-gray-200 w-full mt-3 lg:w-1/3 p-2 rounded-md"
-            value={nombre}
-            onChange={(e) => setNombre(e.target.value)}
-          />
+          {session &&(
+            <>
+            <label
+              htmlFor="nombre"
+              className="block text-slate-800 uppercase font-bold  text-3xl"
+            >
+              Nombre
+            </label>
+            <span className="">{session.user.email}</span>
+            </>
+          )}
+        </div>
+        <div>
+          <>
+            <label
+              htmlFor="nombre"
+              className="block text-slate-800 uppercase font-bold  text-3xl">
+              Mesa
+            </label>
+            <select>
+            {[...Array(10)].map((_, index) => (
+              <option key={index + 1} value={index + 1}>
+                {index + 1}
+              </option>
+            ))}
+            </select>
+          </>
         </div>
         <div className="mt-10">
           <p className="text-2xl">
