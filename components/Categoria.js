@@ -7,9 +7,18 @@ const Categoria = ({ categoria}) => {
   const { id } = categoria;
   console.log(categoriaActual)
   console.log("categoria",categoria)
-  function cerrar() {
-    let navbar = document.querySelector(".navbar-toggler");
-    navbar.click();
+  
+  function resolutionViewer() {
+    var screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+
+    if (screenWidth < 768) {
+        hideCategories();
+    }
+  };
+  function hideCategories() {
+    let navbar = document.querySelector(".options");
+    const classes = navbar.classList;
+    const result = classes.replace("block", "hidden");
   }
   return (
     
@@ -28,9 +37,10 @@ const Categoria = ({ categoria}) => {
       <button
         type="button"
         className="font-2xl font-extrabold tracking-wider hover:cursor-pointer"
-        onClick={() => handleClickCategoria(id)
-        
-        }
+        onClick={() => {
+          handleClickCategoria(id)
+          resolutionViewer()
+        }}
       >
         {nombre}
       </button>
